@@ -1,0 +1,20 @@
+EuroSAT Satellite Classification - CNN Test Report
+=================================================================
+                      precision    recall  f1-score   support
+
+          AnnualCrop     0.8200    0.8200    0.8200       450
+              Forest     0.8912    0.8556    0.8730       450
+HerbaceousVegetation     0.6945    0.6467    0.6697       450
+             Highway     0.5815    0.4187    0.4868       375
+          Industrial     0.8551    0.9440    0.8973       375
+             Pasture     0.6071    0.9067    0.7273       300
+       PermanentCrop     0.6384    0.5413    0.5859       375
+         Residential     0.8625    0.9756    0.9155       450
+               River     0.6903    0.5707    0.6248       375
+             SeaLake     0.8688    0.9267    0.8968       450
+
+            accuracy                         0.7657      4050
+           macro avg     0.7509    0.7606    0.7497      4050
+        weighted avg     0.7607    0.7657    0.7580      4050
+
+Inference Time for 4050 images: 1.38s (0.34 ms/sample)

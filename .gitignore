@@ -1,17 +1,31 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
 
 # Virtual environments
+.venv/
 venv/
 .env/
+env/
 
-# Model files
+# Datasets & caches
+dataset/
+*.zip
+*.tar.gz
+
+# Model weights & checkpoints
 *.h5
+*.keras
+*.pb
+checkpoints/
 
 # Jupyter
 .ipynb_checkpoints/
 
-# OS files
+# OS and IDE files
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+
