@@ -129,8 +129,8 @@ LandUse-CNN-Satellite-Image-Classification/
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repository-url>
-cd LandUse-CNN-Satellite-Image-Classification
+git clone https://github.com/hitesh-2005/EuroSAT-Satellite-Image-Classification.git
+cd EuroSAT-Satellite-Image-Classification
 ```
 
 ### 2. Set Up Virtual Environment (Python 3.10 recommended)
