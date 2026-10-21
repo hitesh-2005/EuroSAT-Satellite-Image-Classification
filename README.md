@@ -251,13 +251,26 @@ Top Candidates:
 
 ---
 
-## 👩‍💻 Attribution, Licensing & Original Work
+## Dataset & References
 
-* **Original Author:** [Padmaja Dhulipudi](https://github.com/Padmaja-Dhulipudi)
-* **Original Repository:** [LandUse-CNN-Satellite-Image-Classification](https://github.com/Padmaja-Dhulipudi/LandUse-CNN-Satellite-Image-Classification)
-* **Dataset Paper & Citation:** Patrick Helber, Benjamin Bischke, Andreas Dengel, Damian Borth. *"EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification."* IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2019.
-* **Dataset License:** Open Access under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
-* **Upstream Code License & Reuse Notice:** The upstream repository does not contain an explicit open-source license file, which means GitHub's default copyright applies (code is publicly readable and forkable under GitHub Terms of Service, but all rights remain with the original author). This fork is published as an educational enhancement and personal portfolio demonstration, not as a commercial product or independent greenfield work. All original credits are fully retained.
+This project uses the **EuroSAT RGB dataset** for land-use and land-cover image classification.
+
+**Dataset publication:**  
+Helber, P., Bischke, B., Dengel, A., & Borth, D. (2019). *EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification.* IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing.
+
+**Dataset:** [EuroSAT — Official Project](https://github.com/phelber/EuroSAT)
+
+**Dataset license:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+
+### Implementation Notes
+
+This repository develops an extended classification pipeline with reproducible dataset splitting, a custom CNN baseline, MobileNetV2 transfer learning, held-out test evaluation, per-class performance analysis, and command-line image inference.
+
+The implementation builds on an existing public project. The training pipeline, evaluation workflow, inference utilities, and documentation have been extended and adapted for this version.
+
+**Upstream reference:** [LandUse-CNN-Satellite-Image-Classification](https://github.com/Padmaja-Dhulipudi/LandUse-CNN-Satellite-Image-Classification)
+
+Please refer to the upstream repository and applicable licensing terms for the original code. The dataset and its license are separate from the code in this repository.
 
 ### Key Modifications & Enhancements in This Repository:
 1. **Automated Dataset Downloader (`download_data.py`):** Replaced missing/broken local dataset paths with an automated verification and streaming pipeline from verified mirrors.
