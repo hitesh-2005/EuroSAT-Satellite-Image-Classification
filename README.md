@@ -26,15 +26,15 @@ All experiments were executed and verified on a 70/15/15 stratified split of all
 
 ### Overall Performance Comparison
 
-| Metric | Baseline CNN (Custom) | MobileNetV2 (Transfer Learning) | Absolute Delta |
+| Metric | Baseline CNN (Custom) | MobileNetV2 (Transfer Learning) | Difference (Percentage Points / Value) |
 | :--- | :---: | :---: | :---: |
-| **Test Accuracy** | **76.57%** | **88.07%** | **+11.50%** |
+| **Test Accuracy** | **76.57%** | **88.07%** | **+11.50 percentage points (+11.50 pp)** |
 | **Macro F1-Score** | **0.7497** | **0.8760** | **+0.1263** |
 | **Weighted F1-Score** | **0.7580** | **0.8807** | **+0.1227** |
 | **Macro Precision** | **0.7509** | **0.8772** | **+0.1263** |
 | **Macro Recall** | **0.7606** | **0.8755** | **+0.1149** |
-| **Inference Latency** | **0.34 ms / image** | **1.07 ms / image** | +0.73 ms |
-| **Trainable Parameters** | 2,117,962 (8.08 MB) | 167,818 (655 KB) | **-92.1% trainable params** |
+| **Inference Latency** | **0.34 ms / image** | **1.07 ms / image** | **+0.73 ms** |
+| **Trainable Parameters** | 2,117,962 (8.08 MB) | 167,818 (655 KB) | **-1,950,144 (-92.1% params)** |
 
 ---
 
@@ -54,11 +54,12 @@ All experiments were executed and verified on a 70/15/15 stratified split of all
 | **SeaLake** | 0.8968 | **0.9586** | 0.9661 | 0.9511 | 450 |
 | **Macro Average** | **0.7497** | **0.8760** | **0.8772** | **0.8755** | **4,050** |
 
-> **Key Remote-Sensing Finding:** The greatest gains from transfer learning occurred on narrow linear features and spectrally overlapping vegetative classes:
-> - **Highway F1:** Increased from **48.68% to 80.46% (+31.78%)**
-> - **PermanentCrop F1:** Increased from **58.59% to 82.13% (+23.54%)**
-> - **River F1:** Increased from **62.48% to 81.31% (+18.83%)**
-> - **HerbaceousVegetation F1:** Increased from **66.97% to 85.40% (+18.43%)**
+> **Key Remote-Sensing Finding:** The greatest gains from transfer learning occurred on narrow linear features and spectrally overlapping vegetative classes (measured in percentage-point differences):
+> - **Overall Test Accuracy:** Improved by **11.50 percentage points** (from 76.57% to 88.07%)
+> - **Highway F1:** Improved by **31.78 percentage points** (from 48.68% to 80.46%)
+> - **PermanentCrop F1:** Improved by **23.54 percentage points** (from 58.59% to 82.13%)
+> - **River F1:** Improved by **18.83 percentage points** (from 62.48% to 81.31%)
+> - **HerbaceousVegetation F1:** Improved by **18.43 percentage points** (from 66.97% to 85.40%)
 > 
 > Pretrained ImageNet weights provide edge and multi-scale texture representations that custom shallow networks struggle to learn from scratch with 64×64 patches.
 
@@ -69,13 +70,16 @@ All experiments were executed and verified on a 70/15/15 stratified split of all
 ### 1. MobileNetV2 Normalized Confusion Matrix
 ![MobileNetV2 Confusion Matrix](outputs/confusion_matrix_MOBILENETV2.png)
 
-### 2. Training Curves (MobileNetV2 Loss & Accuracy)
+### 2. MobileNetV2 Training Curves (Loss & Accuracy)
 ![MobileNetV2 Learning Curves](outputs/learning_curves_mobilenetv2.png)
 
 ### 3. Baseline CNN Normalized Confusion Matrix
 ![Baseline CNN Confusion Matrix](outputs/confusion_matrix_CNN.png)
 
-### 4. Sample Inference Prediction
+### 4. Baseline CNN Training Curves (Loss & Accuracy)
+![Baseline CNN Learning Curves](outputs/learning_curves_cnn.png)
+
+### 5. Sample Inference Prediction
 ![Sample Prediction](outputs/sample_prediction.png)
 
 ---
@@ -135,9 +139,12 @@ cd EuroSAT-Satellite-Image-Classification
 
 ### 2. Set Up Virtual Environment (Python 3.10 recommended)
 ```bash
-# Windows
+# Windows (PowerShell)
 py -3.10 -m venv .venv
-.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
+
+# Windows (Command Prompt)
+# .venv\Scripts\activate.bat
 
 # Linux / macOS
 python3.10 -m venv .venv
@@ -244,16 +251,18 @@ Top Candidates:
 
 ---
 
-## 👩‍💻 Attribution & Original Work
+## 👩‍💻 Attribution, Licensing & Original Work
 
 * **Original Author:** [Padmaja Dhulipudi](https://github.com/Padmaja-Dhulipudi)
 * **Original Repository:** [LandUse-CNN-Satellite-Image-Classification](https://github.com/Padmaja-Dhulipudi/LandUse-CNN-Satellite-Image-Classification)
-* **Dataset Paper:** Patrick Helber, Benjamin Bischke, Andreas Dengel, Damian Borth. *"EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification."* IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2019.
+* **Dataset Paper & Citation:** Patrick Helber, Benjamin Bischke, Andreas Dengel, Damian Borth. *"EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification."* IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2019.
+* **Dataset License:** Open Access under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+* **Upstream Code License & Reuse Notice:** The upstream repository does not contain an explicit open-source license file, which means GitHub's default copyright applies (code is publicly readable and forkable under GitHub Terms of Service, but all rights remain with the original author). This fork is published as an educational enhancement and personal portfolio demonstration, not as a commercial product or independent greenfield work. All original credits are fully retained.
 
 ### Key Modifications & Enhancements in This Repository:
 1. **Automated Dataset Downloader (`download_data.py`):** Replaced missing/broken local dataset paths with an automated verification and streaming pipeline from verified mirrors.
-2. **Resolved Data Leakage:** Replaced non-deterministic single 80/20 `validation_split` with a reproducible 70/15/15 stratified train/val/test partition with fixed random seeds.
-3. **Implemented Missing Transfer Learning:** Built and verified the MobileNetV2 transfer learning architecture claimed in the original README, boosting test accuracy from **76.57% to 88.07%** and macro F1 from **0.7497 to 0.8760**.
+2. **Resolved Data Leakage:** Replaced non-deterministic single 80/20 `validation_split` with a reproducible 70/15/15 stratified train/val/test partition with fixed random seeds (`seed=42`).
+3. **Implemented Missing Transfer Learning:** Built and verified the MobileNetV2 transfer learning architecture claimed in the original README, boosting test accuracy by **11.50 percentage points** (from 76.57% to 88.07%) and macro F1 from **0.7497 to 0.8760**.
 4. **Comprehensive Remote-Sensing Evaluation (`evaluate.py`):** Added per-class Precision, Recall, F1-scores, normalized Confusion Matrix heatmaps, and training curve tracking.
 5. **Standalone Inference CLI (`predict.py`):** Added single-image inference returning top-3 candidates with probability bars and visual plot export.
 6. **Production Standards:** Added `requirements.txt`, updated `.gitignore` to prevent committing heavy binaries/weights, and documented reproducible execution instructions.
